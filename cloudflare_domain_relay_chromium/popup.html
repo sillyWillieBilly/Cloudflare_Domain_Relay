@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cloudflare Email Alias</title>
+  <script src="browser-polyfill.js"></script>
+  <script src="popup.js" defer></script>
+  <style>
+    #output { 
+      white-space: pre-wrap; 
+      margin-top: 10px; 
+      background-color: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+    }
+  
+    #output ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    #output li {
+      background-color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.5s ease;
+      position: relative;
+    }
+  
+    #output li:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+  
+    /* Smooth removal */
+    .fade-out {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  
+    #output .alias-email {
+      font-weight: bold;
+      color: #2a6496;
+      display: block;
+      margin-bottom: 4px;
+    }
+  
+    #output .forward-email {
+      color: #555;
+      display: block;
+      margin-bottom: 8px;
+    }
+  
+    /* Group the status and delete button horizontally */
+    #output .alias-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+  
+    .status, .badge-active, .badge-disabled {
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+    }
+  
+    .badge-active {
+      background-color: #28a745;
+    }
+  
+    .badge-disabled {
+      background-color: #dc3545;
+    }
+  
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background-color 0.2s ease;
+    }
+  
+    .delete-btn:hover {
+      background-color: #c82333;
+    }
+	.disabled-alias {
+	  opacity: 0.5;
+	  pointer-events: none;
+	}
+
+	.toggle-btn {
+	  background-color: #6c757d;
+	  color: white;
+	  border: none;
+	  padding: 6px 12px;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  font-size: 13px;
+	  transition: background-color 0.2s ease;
+	}
+
+	.toggle-btn.active {
+	  background-color: #28a745;
+	}
+
+	.toggle-btn.disabled {
+	  background-color: #dc3545;
+	}
+	
+	.alias-disabled {
+	  opacity: 0.5;
+	}
+	
+	
+  </style>
+
+</head>
+
+<body>
+  <h2>Cloudflare API</h2>
+  <input type="password" id="apiToken" placeholder="Paste API Token">
+  <button id="saveToken">Save Token</button>
+
+  <h3>Domain</h3>
+  <select id="domainSelect"></select>
+
+  <h3>Alias</h3>
+  <input type="text" id="alias" placeholder="Enter alias (e.g., shop)">
+
+  <h3>Forward To</h3>
+  <select id="forwardSelect"></select>
+
+  <button id="createAlias">Create Alias</button>
+
+  <div id="destinationAddressesSection" style="margin-top: 20px; display: none;"> <!-- Initially hidden -->
+      <h4>Verified Destination Addresses:</h4>
+      <ul id="destinationList" style="font-size: 0.9em; list-style: disc; margin-left: 20px; max-height: 100px; overflow-y: auto; background-color: #eee; padding: 5px 10px; border-radius: 3px;">
+          <!-- Addresses will be populated here -->
+      </ul>
+  </div>
+
+  <h3>Existing Aliases</h3>
+  <button id="listAliases">List Aliases</button>
+
+  <div id="output"></div>
+</body>
+</html>

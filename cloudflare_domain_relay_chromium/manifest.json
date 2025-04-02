@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Cloudflare Email Manager",
+  "version": "1.0",
+  "description": "Manage Cloudflare Email Routing",
+  "permissions": ["storage", "tabs", "activeTab", "scripting","clipboardWrite"],
+  "host_permissions": ["https://api.cloudflare.com/"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon.png"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "browser_specific_settings": {
+  "gecko": {
+    "id": "firefox-addon@vstam.mozmail.com"
+    }
+  }
+
+}
