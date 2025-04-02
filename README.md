@@ -1,205 +1,220 @@
 (For chromium please download the whole cloudflare_domain_relay folder)
+
+
 (for firefox you only need the cloudflare_domain_relay.xpi)
 
 
-Addon Description
+**Addon Description**
 
-Cloudflare Email Manager
+**Cloudflare Email Manager**
 
 Tired of logging into the Cloudflare dashboard just to manage your email aliases? The Cloudflare Email Manager extension brings Email Routing management directly to your browser toolbar!
 
 Quickly view, search, create, enable, disable, and delete your email forwarding rules for any of your Cloudflare domains. Perfect for users who frequently create temporary or service-specific aliases on the fly.
 
-Key Features:
 
-List & Search: Instantly view and filter your existing email aliases for the selected domain.
+**Key Features:**
 
-Quick Create: Easily create new aliases. It even suggests an alias based on the website you're currently visiting!
+      List & Search: Instantly view and filter your existing email aliases for the selected domain.
+      
+      Quick Create: Easily create new aliases. It even suggests an alias based on the website you're currently visiting!
+      
+      Manage Aliases: Enable, disable, or delete individual aliases with a single click.
+      
+      Copy Alias: Quickly copy any alias email address to your clipboard.
+      
+      Bulk Actions: Select multiple aliases to enable, disable, or delete them all at once.
+      
+      Import & Export: Backup your rules for a domain to a JSON file, or import rules from a previously exported file.
+      
+      Domain Selection: Easily switch between your Cloudflare domains (Zones).
+      
+      Destination Addresses: See your verified forwarding destinations and select where new aliases should forward to.
+      
+      Customization: Options for sorting, pagination, grouping by domain, and a dark mode toggle.
+      
+      Secure: Your Cloudflare API token is stored securely in your browser's local storage and is only used to communicate directly with the official Cloudflare API.
+      
+      Streamline your Cloudflare Email Routing workflow and manage your aliases efficiently!
 
-Manage Aliases: Enable, disable, or delete individual aliases with a single click.
 
-Copy Alias: Quickly copy any alias email address to your clipboard.
 
-Bulk Actions: Select multiple aliases to enable, disable, or delete them all at once.
 
-Import & Export: Backup your rules for a domain to a JSON file, or import rules from a previously exported file.
-
-Domain Selection: Easily switch between your Cloudflare domains (Zones).
-
-Destination Addresses: See your verified forwarding destinations and select where new aliases should forward to.
-
-Customization: Options for sorting, pagination, grouping by domain, and a dark mode toggle.
-
-Secure: Your Cloudflare API token is stored securely in your browser's local storage and is only used to communicate directly with the official Cloudflare API.
-
-Streamline your Cloudflare Email Routing workflow and manage your aliases efficiently!
 
 How To Use Cloudflare Email Manager
 
 This guide will walk you through setting up and using the extension.
 
 1. Prerequisites:
+      
+      A Cloudflare account.
+      
+      At least one domain (Zone) managed by Cloudflare.
+      
+      Cloudflare Email Routing configured and enabled for that domain.
+      
+      Verified Destination Addresses added in your Cloudflare Email Routing settings (these are the real email addresses you want your aliases to forward to).
+      
+      A Cloudflare API Token (NOT your Global API Key).
 
-A Cloudflare account.
 
-At least one domain (Zone) managed by Cloudflare.
-
-Cloudflare Email Routing configured and enabled for that domain.
-
-Verified Destination Addresses added in your Cloudflare Email Routing settings (these are the real email addresses you want your aliases to forward to).
-
-A Cloudflare API Token (NOT your Global API Key).
 
 2. Getting Your Cloudflare API Token:
 
-This is the most crucial step. The extension needs permission to interact with your Cloudflare account.
+      This is the most crucial step. The extension needs permission to interact with your Cloudflare account.
+      
+      Log in to your Cloudflare Dashboard.
+      
+      Go to My Profile (click your user icon top right) > API Tokens.
+      
+      Click "Create Token".
+      
+      Find the "Create Custom Token" section and click "Get started".
+      
+      Give your token a descriptive name (e.g., "Browser Email Manager").
+      
+      Set the Permissions as follows:
+      
+      Zone | Zone | Read (Allows listing your domains)
+      
+      Zone | Email Routing Rules | Edit (Allows reading, creating, editing, deleting email rules/aliases)
+      
+      Account | Email Routing Addresses | Read (Allows listing your verified destination addresses)
+      
+      Set the Zone Resources (IMPORTANT):
+      
+      Select "Include" -> "Specific zone" -> Choose the domain(s) you want to manage with the extension. You can select multiple. (Alternatively, select "All zones" if you want it to work for any domain you own, but specific zones are slightly more secure).
+      
+      Set the Account Resources:
+      
+      Select "Include" -> "Specific account" -> Choose your main Cloudflare account.
+      
+      You can leave Client IP Address Filtering and TTL as defaults.
+      
+      Click "Continue to summary".
+      
+      Review the permissions and click "Create Token".
+      
+      Immediately copy the generated token! You won't be able to see it again. Store it securely temporarily.
 
-Log in to your Cloudflare Dashboard.
 
-Go to My Profile (click your user icon top right) > API Tokens.
-
-Click "Create Token".
-
-Find the "Create Custom Token" section and click "Get started".
-
-Give your token a descriptive name (e.g., "Browser Email Manager").
-
-Set the Permissions as follows:
-
-Zone | Zone | Read (Allows listing your domains)
-
-Zone | Email Routing Rules | Edit (Allows reading, creating, editing, deleting email rules/aliases)
-
-Account | Email Routing Addresses | Read (Allows listing your verified destination addresses)
-
-Set the Zone Resources (IMPORTANT):
-
-Select "Include" -> "Specific zone" -> Choose the domain(s) you want to manage with the extension. You can select multiple. (Alternatively, select "All zones" if you want it to work for any domain you own, but specific zones are slightly more secure).
-
-Set the Account Resources:
-
-Select "Include" -> "Specific account" -> Choose your main Cloudflare account.
-
-You can leave Client IP Address Filtering and TTL as defaults.
-
-Click "Continue to summary".
-
-Review the permissions and click "Create Token".
-
-Immediately copy the generated token! You won't be able to see it again. Store it securely temporarily.
 
 3. Initial Setup:
 
-Install the "Cloudflare Email Manager" extension in your browser.
+      Install the "Cloudflare Email Manager" extension in your browser.
+      
+      ### **Step 1: Open the Extensions Page**
+      1. Open **Brave** (just like how you open any other program) (Or any other chromium browser).
+      2. Look at the **top-right corner** of the window. You should see **three horizontal lines or dots** (like a hamburger menu 🍔).
+      3. **Click on it**.
+      4. In the menu that appears, look for something called **"Extensions"** and click it.
+         
+         _(If you don't see "Extensions," first click "Settings," then look for "Extensions" on the left side.)_
+      
+      
+      ### **Step 2: Enable Developer Mode**
+      1. Once you're on the **Extensions** page, look at the **top-right corner** again.
+      2. You should see a little switch or button that says **"Developer mode"**.
+      3. **Turn it ON** (click it so it becomes active).
+      
+      
+      ### **Step 3: Load Your Custom Add-on**
+      1. Now, look for a button that says **"Load unpacked"** and **click it**.
+      2. A **file window** will open (this is where you pick the addon you want to install).
+      3. Find the folder where your **custom addon** is stored. _(If someone gave you the addon, they might have sent you a folder with some files inside.)_
+      4. **Click the folder once** to select it, then click **"Select Folder"** or **"OK"**.
+      5. Your addon should now appear in the list of extensions!
+      
+      
+      ### **Step 4: Make Sure It Works**
+      - If everything went well, the extension should now be active.
+      - You might see a new icon near the top-right of Brave.
+      - If the extension isn't working, try **turning it off and on again** in the Extensions page.
+      
+      
+      ### **Bonus Tip: If You Have a ZIP File Instead of a Folder**
+      If someone gave you the addon as a **.zip file**, you **must** first "unzip" it:
+      1. **Right-click** the .zip file.
+      2. Choose **"Extract All"** (or something similar).
+      3. Now, use the extracted folder when loading the addon in Step 3.
+      
+      
+      That’s it! Now you’ve successfully installed a custom addon in Brave! 🚀
 
-### **Step 1: Open the Extensions Page**
-1. Open **Brave** (just like how you open any other program) (Or any other chromium browser).
-2. Look at the **top-right corner** of the window. You should see **three horizontal lines or dots** (like a hamburger menu 🍔).
-3. **Click on it**.
-4. In the menu that appears, look for something called **"Extensions"** and click it.
-   
-   _(If you don't see "Extensions," first click "Settings," then look for "Extensions" on the left side.)_
 
-
-### **Step 2: Enable Developer Mode**
-1. Once you're on the **Extensions** page, look at the **top-right corner** again.
-2. You should see a little switch or button that says **"Developer mode"**.
-3. **Turn it ON** (click it so it becomes active).
-
-
-### **Step 3: Load Your Custom Add-on**
-1. Now, look for a button that says **"Load unpacked"** and **click it**.
-2. A **file window** will open (this is where you pick the addon you want to install).
-3. Find the folder where your **custom addon** is stored. _(If someone gave you the addon, they might have sent you a folder with some files inside.)_
-4. **Click the folder once** to select it, then click **"Select Folder"** or **"OK"**.
-5. Your addon should now appear in the list of extensions!
-
-
-### **Step 4: Make Sure It Works**
-- If everything went well, the extension should now be active.
-- You might see a new icon near the top-right of Brave.
-- If the extension isn't working, try **turning it off and on again** in the Extensions page.
-
-
-### **Bonus Tip: If You Have a ZIP File Instead of a Folder**
-If someone gave you the addon as a **.zip file**, you **must** first "unzip" it:
-1. **Right-click** the .zip file.
-2. Choose **"Extract All"** (or something similar).
-3. Now, use the extracted folder when loading the addon in Step 3.
-
-
-That’s it! Now you’ve successfully installed a custom addon in Brave! 🚀
 
 3.5:
 
-Click the extension icon in your browser toolbar to open the popup.
+      Click the extension icon in your browser toolbar to open the popup.
+      
+      You'll see a field for the API Token. Paste the token you just created into the "Paste API Token" input field.
+      
+      Click the "Save Token" button.
+      
+      The extension will verify the token and load your domains into the "Domain" dropdown. It will also load your verified destination addresses under "Forward To" and display them below.
+      
+      If you have multiple domains, select the one you want to manage from the "Domain" dropdown. The extension will remember your last selection.
 
-You'll see a field for the API Token. Paste the token you just created into the "Paste API Token" input field.
 
-Click the "Save Token" button.
-
-The extension will verify the token and load your domains into the "Domain" dropdown. It will also load your verified destination addresses under "Forward To" and display them below.
-
-If you have multiple domains, select the one you want to manage from the "Domain" dropdown. The extension will remember your last selection.
 
 4. Using the Extension:
 
-Viewing Aliases:
-
-Select your desired domain.
-
-Click "List Aliases" (or it may load automatically). Your existing aliases for that domain will appear below.
-
-Search: Use the "Search..." box (above the list) to filter aliases by name or destination.
-
-Sort: Use the dropdown (next to search, often showing "Name Asc") to change sorting.
-
-Pagination: Use the "« Prev" and "Next »" buttons if you have many aliases. Change the number shown per page with the dropdown next to sort.
-
-Group/Dark Mode: Use the toggles above the list to group aliases by domain (if showing all) or switch to dark mode.
-
-Creating an Alias:
-
-Make sure the correct Domain is selected.
-
-In the "Alias" input field, type the first part of the email address (e.g., info, contact, amazon). Tip: The field often auto-suggests an alias based on the website you are currently viewing.
-
-Select the real email address you want this alias to forward to from the "Forward To" dropdown.
-
-Click the "Create Alias" button. A confirmation toast will appear, and the list will refresh.
-
-Managing Individual Aliases:
-
-Find the alias in the list.
-
-Copy: Click the clipboard icon (📋) next to the alias name to copy the full alias email address.
-
-Enable/Disable: Click the "Enable" or "Disable" button. The status badge ("Active"/"Disabled") and button text will update.
-
-Delete: Click the red "❌" button. You'll be asked for confirmation before the alias rule is deleted.
-
-Bulk Actions:
-
-Check the box next to each alias you want to act upon.
-
-Use the "Select All" checkbox (above the list) to select/deselect all visible aliases.
-
-Click "Enable Sel.", "Disable Sel.", or "Delete Sel." (use with caution!) below the Select All checkbox. Confirm the action when prompted.
-
-Import/Export:
-
-Export: Select the domain you want to export rules for. Click the "Export" button (near the top right). A JSON file containing only the email alias rules for that domain will be downloaded.
-
-Import: Select the domain you want to import rules into. Click the "Import" button. Choose a valid JSON file (previously exported or similarly structured). The extension will attempt to create rules from the file, skipping duplicates and reporting progress/errors.
-
-Troubleshooting:
-
-"Invalid Token" / "Failed to load domains": Double-check you copied the API Token correctly and that it has exactly the permissions listed in Step 2. Ensure the token is active and not expired.
-
-"No verified destinations": You must add and verify forwarding email addresses in your main Cloudflare Dashboard under Email > Email Routing > Destination Addresses before you can create aliases.
-
-"Error creating alias": The alias might already exist, or there might be a temporary Cloudflare API issue. Check the error message.
-
-Alias creation button disabled: Make sure you've entered a valid alias name (no spaces, standard email characters) AND selected a destination address from the "Forward To" dropdown.
-
-Enjoy managing your Cloudflare Email Aliases more efficiently!
+      Viewing Aliases:
+      
+      Select your desired domain.
+      
+      Click "List Aliases" (or it may load automatically). Your existing aliases for that domain will appear below.
+      
+      Search: Use the "Search..." box (above the list) to filter aliases by name or destination.
+      
+      Sort: Use the dropdown (next to search, often showing "Name Asc") to change sorting.
+      
+      Pagination: Use the "« Prev" and "Next »" buttons if you have many aliases. Change the number shown per page with the dropdown next to sort.
+      
+      Group/Dark Mode: Use the toggles above the list to group aliases by domain (if showing all) or switch to dark mode.
+      
+      Creating an Alias:
+      
+      Make sure the correct Domain is selected.
+      
+      In the "Alias" input field, type the first part of the email address (e.g., info, contact, amazon). Tip: The field often auto-suggests an alias based on the website you are currently viewing.
+      
+      Select the real email address you want this alias to forward to from the "Forward To" dropdown.
+      
+      Click the "Create Alias" button. A confirmation toast will appear, and the list will refresh.
+      
+      Managing Individual Aliases:
+      
+      Find the alias in the list.
+      
+      Copy: Click the clipboard icon (📋) next to the alias name to copy the full alias email address.
+      
+      Enable/Disable: Click the "Enable" or "Disable" button. The status badge ("Active"/"Disabled") and button text will update.
+      
+      Delete: Click the red "❌" button. You'll be asked for confirmation before the alias rule is deleted.
+      
+      Bulk Actions:
+      
+      Check the box next to each alias you want to act upon.
+      
+      Use the "Select All" checkbox (above the list) to select/deselect all visible aliases.
+      
+      Click "Enable Sel.", "Disable Sel.", or "Delete Sel." (use with caution!) below the Select All checkbox. Confirm the action when prompted.
+      
+      Import/Export:
+      
+      Export: Select the domain you want to export rules for. Click the "Export" button (near the top right). A JSON file containing only the email alias rules for that domain will be downloaded.
+      
+      Import: Select the domain you want to import rules into. Click the "Import" button. Choose a valid JSON file (previously exported or similarly structured). The extension will attempt to create rules from the file, skipping duplicates and reporting progress/errors.
+      
+      Troubleshooting:
+      
+      "Invalid Token" / "Failed to load domains": Double-check you copied the API Token correctly and that it has exactly the permissions listed in Step 2. Ensure the token is active and not expired.
+      
+      "No verified destinations": You must add and verify forwarding email addresses in your main Cloudflare Dashboard under Email > Email Routing > Destination Addresses before you can create aliases.
+      
+      "Error creating alias": The alias might already exist, or there might be a temporary Cloudflare API issue. Check the error message.
+      
+      Alias creation button disabled: Make sure you've entered a valid alias name (no spaces, standard email characters) AND selected a destination address from the "Forward To" dropdown.
+      
+      Enjoy managing your Cloudflare Email Aliases more efficiently!
